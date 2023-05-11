@@ -16,7 +16,7 @@
  */
 int lirePref_fromFileName(const char* fileName, eltPrefPostFixee_t* tabEltPref, int* nbEltsPref);
 
-/** TO DO
+/**
  * @brief afficher les elements de la representation prefixee sur un flux de sortie
  * @param file : le flux de sortie
  * @param [in, out] tabEltPref tableau des elements de la representation prefixee
@@ -24,7 +24,7 @@ int lirePref_fromFileName(const char* fileName, eltPrefPostFixee_t* tabEltPref, 
  */
 void printTabEltPref(FILE *file, eltPrefPostFixee_t *tabEltPref, int nbEltsPref);
 
-/** TO DO
+/**
  * @brief creer et initialiser un nouveau point de l'arborescence
  * @param [in] val la valeur du point
  * @return l'adresse du nouveau point
@@ -35,13 +35,13 @@ cell_lvlh_t* allocPoint(char val);
  * @brief construire un arbre avec lvlh a partir de representation prefixee
  * @param [in] tabEltPref tableau des elements de la representation prefixee
  * @param [in] nbRacines nombre de racines de l'arborescence
- * @return : 
+ * @return :
  *     - NULL si l'arbre resultatnt est vide
  *     - l'adresse de la racine de l'arbre sinon
 */
-// pref2lvlh();
+cell_lvlh_t *pref2lvlh(eltPrefPostFixee_t *tabEltPref, int nbRacines);
 
-/** TO DO
+/**
  * @brief liberer les blocs memoire d'un arbre
  * @param [in] adrPtRacine l'adresse du pointeur de la racine d'un arbre
  */

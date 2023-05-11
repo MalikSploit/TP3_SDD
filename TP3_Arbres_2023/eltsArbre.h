@@ -5,14 +5,14 @@
 #ifndef __ELTSARBRE_H__
 #define __ELTSARBRE_H__
 
-/** TO DO
+/**
  * @def NB_ELTPREF_MAX
  * @brief definir le nombre d'elements (couple valeur-nombre_de_fils) maximum 
  *        dans une representation prefixee ou postfixee
  */
 #define NB_ELTPREF_MAX 1000
 
-/** TO DO
+/**
  * @struct eltPrefPostFixee_t
  * @brief definir la SDD pour les elements de la representation prefixee ou postfixee
  * 2 champs :
