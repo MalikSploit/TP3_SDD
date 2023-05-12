@@ -21,7 +21,7 @@ typedef struct pile
 {
     int taille;
     int sommet;
-    eltType *base;
+    eltType_pile *base;
 } pile_t;
 
 /**
@@ -53,7 +53,7 @@ int estVidePile(pile_t *ptPile);
  *                     *code = 0 si reussi
  *                           = 1 si echec
  */
-void empiler(pile_t *ptPile, eltType *ptVal, int *code);
+void empiler(pile_t *ptPile, eltType_pile *ptVal, int *code);
 
 /**
  * @brief Sortir un element de la pile
@@ -63,7 +63,7 @@ void empiler(pile_t *ptPile, eltType *ptVal, int *code);
  *                     *code = 0 si reussi
  *                           = 1 si echec
  */
-void depiler(pile_t *ptPile, eltType *ptRes, int *code);
+void depiler(pile_t *ptPile, eltType_pile *ptRes, int *code);
 
 
 #endif

@@ -98,47 +98,63 @@ cell_lvlh_t* allocPoint(char val)
  *     - NULL si l'arbre resultatnt est vide
  *     - l'adresse de la racine de l'arbre sinon
 */
-cell_lvlh_t* pref2lvlh(eltPrefPostFixee_t *tabEltPref, int nbRacines)
+cell_lvlh_t * pref2lvlh(eltPrefPostFixee_t *tabEltPref, int nbRacines)
 {
     if (nbRacines <= 0)
     {
         return NULL;
     }
 
-    pile_t *pile = initPile(nbRacines);
-    cell_lvlh_t *adTete = NULL;
-    cell_lvlh_t **pprec = &adTete;
-    eltPrefPostFixee_t *courLC = tabEltPref;
-    int NB_fils_ou_frere = courLC->nbFils;
-    int code = 0;
+    cell_lvlh_t  *racine = NULL;   // contient l'adresse de la racine de l'arbre renvoyé
+    cell_lvlh_t **pprec = &racine; // contient l'adresse à laquelle on doit stocker le prochain noeud visité
+    //afin de créer les liens dans l'arbre
+    cell_lvlh_t  *nouv; //contient l'adresse du nouveau noeud créé à chaque visite d'un élément de tabEltPref
 
-    while (NB_fils_ou_frere > 0 || !estVidePile(pile))
+    int     nbFils_ou_Freres = nbRacines; //contient soit le nombre de fils ou de frères
+    eltPrefPostFixee_t   *courLco = tabEltPref; // pointeur courant pour le parcours de tabEltPref
+
+    pile_t      *pile = initPile(PILE_SZ); //pile pour stocker les noeuds à visiter prochainement
+    eltType_pile eltPile; //variable qui contient l'élément ajouté à la pile
+    int          code;
+
+    while ( nbFils_ou_Freres>0 || !estVidePile(pile) )
     {
-        if (NB_fils_ou_frere > 0)
+        if (nbFils_ou_Freres>0)
         {
-            cell_lvlh_t *nouv = allocPoint(courLC->val);
+            nouv = allocPoint(courLco->val);//créer un nouveau noeud de l'arbre de valeur val
+            // stocker le nouveau noeud à la bonne adresse pour créer les liens de l'arbre
             *pprec = nouv;
-            eltType temp = { .num = (nouv->lh != NULL), .lettre = nouv->val };
-            empiler(pile, &temp, &code);
-            pprec = &(nouv->lv);
-            courLC++;
-            NB_fils_ou_frere = courLC->nbFils;
+
+            //ajouter à la pile le lien vertical du noeud courant pour le traiter plus tard (plusieurs lignes)
+            eltPile.adrCell = nouv;
+            eltPile.adrPrec = &nouv->lv;
+            eltPile.nbFils_ou_Freres = courLco->nbFils-1;
+            empiler(pile, &eltPile, &code);
+
+            //mettre à jour pprec pour dire à quelle adresse on va stocker le prochain noeud visité
+            //mettre à jour nbFils_ou_Freres
+            pprec = &nouv->lh;
+            nbFils_ou_Freres = 0;
+
+            // passer a l'element suivant dans la liste contigue
+            courLco++;
         }
-        else
+        else // le point courant n'a pas de fils, on remonte
         {
             if (!estVidePile(pile))
             {
-                eltType depiled;
-                depiler(pile, &depiled, &code);
-                //pprec =
-                NB_fils_ou_frere = depiled.num;
+                depiler(pile, &eltPile, &code);
+                pprec = eltPile.adrPrec;
+                nbFils_ou_Freres = eltPile.nbFils_ou_Freres;
             }
         }
     }
 
+    //libérer la pile et renvoyer le résultat
     libererPile(&pile);
-    return adTete;
+    return racine;
 }
+
 
 /**
  * @brief liberer les blocs memoire d'un arbre

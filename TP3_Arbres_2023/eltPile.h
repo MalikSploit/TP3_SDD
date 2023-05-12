@@ -7,43 +7,27 @@
 
 #include "eltsArbre.h"
 
-
-/* ------------------------- Type de donnees des elements de la pile/file  ------------------------- */
-/**
- * @typedef eltType
- * @brief redefinir 'int' en 'eltType' (pour les elements de type 'int')
- */
-//typedef int eltType;
-
-
-/**
- * @struct eltType
- * @brief Definir le type de donnees des elements (pour les elements de type struct)
- * 2 champs :
- *      - 'lettre' : un caractere
- *      - 'num' : un entier
+/** TO DO
+ * @struct eltType_pile
+ * @brief definir la SDD des elements de pile
+ * 3 champs :
+ *   - adrCell : l'adresse d'un point/cellule d'une arborescence
+ *   - adrPrec : l'adresse du pointeur prec du point
+ *   - nbFils_ou_Freres : le nombre de fils ou freres d'un point
  */
 typedef struct
 {
-    char lettre;
-    int num;
-} eltType;
+    cell_lvlh_t *adrCell; // l'adresse d'un point/cellule d'une arborescence
+    cell_lvlh_t **adrPrec; // l'adresse du pointeur prec du point
+    int nbFils_ou_Freres; // le nombre de fils ou freres d'un point
+} eltType_pile;
 
-
-/* ------------------------- Prototype des fonctions de gestion des elements  ------------------------- */
-/**
- * @brief Ecrire une fonction de comparaison de 2 elements
- * @param [in] elt1 l'adresse du 1er element du type 'eltType'
- * @param [in] elt2 l'adresse du 2eme element du type 'eltType'
- * @return 1 si les 2 elements sont egaux; 0 s'ils sont differents
- */
-int compareElt(const eltType *elt1, const eltType *elt2);
 
 /**
  * @brief Copier la valeur d'un element dans un autre emplacement
- * @param [in] source l'adresse de l'element a copier
- * @param [in] destination l'adresse de la destination
+ * @param [in] src l'adresse de l'element a copier
+ * @param [in] dest l'adresse de la destination
  */
-void copyElt(const eltType *source, eltType *destination);
+void copyElt(eltType_pile *src, eltType_pile *dest);
 
 #endif
