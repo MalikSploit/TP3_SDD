@@ -78,14 +78,16 @@ TEST(printTabEltPref_exTP) {
 
 
 TEST(pref2lvlh1_exTP) {
+    //Test avec un fichier qui existe
 	int nbRacines = 0;
 	int nbEltsPref = 0;
 	eltPrefPostFixee_t tabEltPref[NB_ELTPREF_MAX];
 	cell_lvlh_t *racine = NULL;
 
-	char buffer[1024];
-	FILE * file = fmemopen(buffer, 1024, "w");
-	REQUIRE ( NULL != file);
+    //Inutile
+	//char buffer[1024];
+	//FILE * file = fmemopen(buffer, 1024, "w");
+	//REQUIRE ( NULL != file);
 
 	printf("\033[35m\npref2lvlh1_exTP :");
 	printf("\033[0m\n");
@@ -113,7 +115,21 @@ TEST(pref2lvlh1_exTP) {
 
     libererArbre(&racine);
     REQUIRE(racine == NULL);
-    fclose(file);
+    //fclose(file);
+
+
+    //Test avec un fichier vide :
+    int nbRacines2 = 0;
+    int nbEltsPref2 = 0;
+    eltPrefPostFixee_t tabEltPref2[NB_ELTPREF_MAX];
+    cell_lvlh_t *racine2 = NULL;
+    printf("\033[35m\npref2lvlhFichier_Vide :");
+    printf("\033[0m\n");
+
+    nbRacines = lirePref_fromFileName("../Fichier_Vide.txt", tabEltPref2, &nbEltsPref2);
+    racine = pref2lvlh(tabEltPref2, nbRacines2);
+    REQUIRE( NULL == racine2 );
+    REQUIRE(nbRacines2 == 0);
 }
 
 
