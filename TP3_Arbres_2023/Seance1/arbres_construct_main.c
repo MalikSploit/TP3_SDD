@@ -76,6 +76,7 @@ TEST(printTabEltPref_exTP) {
 
 // 2  (A,3)  (B,2)  (E,0)  (J,0)  (D,0)  (H,1) (G,0)  (C,2)  (F,3)  (K,0)  (M,0)  (T,0)  (I,0)
 
+
 TEST(pref2lvlh1_exTP) {
 	int nbRacines = 0;
 	int nbEltsPref = 0;
@@ -92,35 +93,27 @@ TEST(pref2lvlh1_exTP) {
 	nbRacines = lirePref_fromFileName("../pref_exTP.txt", tabEltPref, &nbEltsPref);
     racine = pref2lvlh(tabEltPref, nbRacines);
     REQUIRE( NULL != racine );
+    REQUIRE(nbRacines == 2);
 
-        // Test des valeurs des nœuds
-        // Comparaison avec le contenu du fichier pref_exTP.txt
-        REQUIRE('A' == racine->val);
-        printf("racine: %c\n", racine->val);
+    // Test des valeurs des nœuds
+    // Comparaison avec le contenu du fichier pref_exTP.txt
+    REQUIRE('A' == racine->val);
+    REQUIRE('C' == racine->lh->val);
+    REQUIRE('B' == racine->lv->val);
+    REQUIRE('D' == racine->lv->lh->val);
+    REQUIRE('H' == racine->lv->lh->lh->val);
+    REQUIRE('F' == racine->lh->lv->val);
+    REQUIRE('I' == racine->lh->lv->lh->val);
+    REQUIRE('E' == racine->lv->lv->val);
+    REQUIRE('J' == racine->lv->lv->lh->val);
+    REQUIRE('G' == racine->lv->lh->lh->lv->val);
+    REQUIRE('K' == racine->lh->lv->lv->val);
+    REQUIRE('M' == racine->lh->lv->lv->lh->val);
+    REQUIRE('T' == racine->lh->lv->lv->lh->lh->val);
 
-        REQUIRE('C' == racine->lh->val);
-        printf("racine droite: %c\n", racine->lh->val);
-
-        REQUIRE('B' == racine->lv->val);
-        printf("bas: %c\n", racine->lv->val);
-//
-//        REQUIRE('D' == racine->lv->lh->val);
-//        printf("bas droite: %c\n", racine->lv->lh->val);
-//
-//        REQUIRE('H' == racine->lv->lh->lh->val);
-//        printf("base droite droite: %c\n", racine->lv->lh->lh->val);
-//
-//        REQUIRE('F' == racine->lh->lv->val);
-//        printf("Second Child: %c\n", racine->lh->lv->val);
-//
-//        REQUIRE('I' == racine->lh->lv->lh->val);
-//        printf("Root: %c\n", racine->lh->lv->lh->val);
-//
-        REQUIRE('E' == racine->lv->lv->val);
-        printf("First Child: %c\n", racine->lv->lv->val);
-//
-//        REQUIRE('J' == racine->lv->lv->lh->val);
-//        printf("Second Child: %c\n", racine->lv->lv->lh->val);
+    libererArbre(&racine);
+    REQUIRE(racine == NULL);
+    fclose(file);
 }
 
 

@@ -14,7 +14,8 @@
 
 BEGIN_TEST_GROUP(ARBRE_PARCOURS)
 
-TEST(nouvCell) {
+TEST(nouvCell)
+{
 	cell_lvlh_t *new;
 
 	new = allocPoint('A');

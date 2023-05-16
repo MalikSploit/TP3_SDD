@@ -15,10 +15,29 @@
  * @param [in] ptCell pointeur vers le 1er frere
  * @return le nombre de fils ou freres
  */
-//  getNbFils_ou_Freres()
-// {
-// // TO DO
-// }
+int getNbFils_ou_Freres(cell_lvlh_t* ptCell)
+{
+    int count = 0;
+
+    // Comptez le nombre de frères en parcourant la liste horizontale.
+    cell_lvlh_t* temp = ptCell;
+    while(temp != NULL)
+    {
+        count++;
+        temp = temp->lh;
+    }
+
+    // Réinitialisez le compteur pour compter les fils.
+    count = 0;
+    temp = ptCell;
+    while(temp != NULL)
+    {
+        count++;
+        temp = temp->lv;
+    }
+
+    return count;
+}
 
 
 /** TO DO
@@ -26,7 +45,20 @@
  * @param [in] file le flux de sortie
  * @param [in] racine la racine de l'arborescence
  */
-//  printPostfixee()
-// {
-// // TO DO
-// }
+void printPostfixee(FILE* file, cell_lvlh_t* racine)
+{
+    if (racine == NULL)
+    {
+        // Arbre vide, rien à faire.
+        return;
+    }
+
+    // Visitez d'abord le sous-arbre vertical (enfants).
+    printPostfixee(file, racine->lv);
+
+    // Puis le sous-arbre horizontal (frères).
+    printPostfixee(file, racine->lh);
+
+    // Enfin, écrivez la valeur du nœud lui-même.
+    fprintf(file, "%c ", racine->val);
+}

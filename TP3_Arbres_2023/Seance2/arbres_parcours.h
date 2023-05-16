@@ -9,17 +9,18 @@
 #include "../eltsArbre.h"
 
 /** TO DO
- * @brief calculer le nombre de fils ou freres d'un point
+ * @brief calculer le nombre de fils ou freres d'un point a partir du pointeur du debut de la liste
  * @param [in] ptCell pointeur vers le 1er frere
  * @return le nombre de fils ou freres
  */
-// getNbFils_ou_Freres();
+int getNbFils_ou_Freres(cell_lvlh_t* ptCell);
+
 
 /** TO DO
  * @brief parcours en profondeur postfixee
  * @param [in] file le flux de sortie
  * @param [in] racine la racine de l'arborescence
  */
-// printPostfixee();
+void printPostfixee(FILE* file, cell_lvlh_t* racine);
 
 #endif

@@ -27,7 +27,7 @@ pile_t* initPile(int taille)
             pile->sommet = -1;
 
             // Allocation de mémoire pour le tableau de taille éléments
-            pile->base = malloc(taille * sizeof(eltType));
+            pile->base = malloc(taille * sizeof(eltType_pile));
             if (!pile->base)
             {
                 free(pile);
@@ -77,7 +77,7 @@ int estVidePile(pile_t *ptPile)
  *                     *code = 0 si reussi
  *                           = 1 si echec
  */
-void empiler(pile_t * ptPile, eltType * ptVal, int * code)
+void empiler(pile_t * ptPile, eltType_pile * ptVal, int * code)
 {
     *code = 1;
     if (ptPile != NULL)
@@ -100,7 +100,7 @@ void empiler(pile_t * ptPile, eltType * ptVal, int * code)
  *                     *code = 0 si reussi
  *                           = 1 si echec
  */
-void depiler(pile_t * ptPile, eltType * ptRes, int * code)
+void depiler(pile_t * ptPile, eltType_pile * ptRes, int * code)
 {
     *code = 1;
     if (ptPile != NULL)
