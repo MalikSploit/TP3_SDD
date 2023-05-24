@@ -27,7 +27,7 @@ TEST(nouvCell)
 	free(new);
 }
 
-/*
+
 TEST(getNbFils_ou_Freres) {
 	int nbRacines = 0;
 	int nbEltsPref = 0;
@@ -62,8 +62,10 @@ TEST(getNbFils_ou_Freres) {
 //	printf("H = %c\n", racine->lv->lh->lh->val);
 	CHECK( 1 == getNbFils_ou_Freres(racine->lv->lh->lh->lv) ); // 1 fils
 
+    fclose(file);
 	libererArbre(&racine);
 }
+
 
 TEST(printPostfixee) {
 	int nbRacines = 0;
@@ -88,7 +90,7 @@ TEST(printPostfixee) {
 	
 	libererArbre(&racine);
 }
-*/
+
 
 END_TEST_GROUP(ARBRE_PARCOURS)
 
