@@ -115,7 +115,6 @@ TEST(pref2lvlh1_exTP) {
 
     libererArbre(&racine);
     REQUIRE(racine == NULL);
-    //fclose(file);
 
 
     //Test avec un fichier vide :
@@ -129,6 +128,8 @@ TEST(pref2lvlh1_exTP) {
     nbRacines = lirePref_fromFileName("../Fichier_Vide.txt", tabEltPref2, &nbEltsPref2);
     racine = pref2lvlh(tabEltPref2, nbRacines2);
     REQUIRE( NULL == racine2 );
+    REQUIRE(racine2->lv == NULL);
+    REQUIRE(racine2->lh == NULL);
     REQUIRE(nbRacines2 == 0);
 }
 

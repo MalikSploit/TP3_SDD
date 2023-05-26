@@ -4,7 +4,6 @@
  */
 #include <stdio.h>
 #include <stdlib.h>
-
 #include "../pile.h"
 #include "../eltsArbre.h"
 #include "arbres_parcours.h"
