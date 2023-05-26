@@ -16,6 +16,25 @@
  * @param [in, out] nbEltsPref l'adresse memoire contenant le nombre des elements du tabEltPref
  * @return le nombre de racines
  */
+/* -------------------------------------------------------------------- */
+/* lirePref_fromFileName    Lecture d'une liste prefixee à partir d'un  */
+/*                          fichier                                     */
+/*                                                                      */
+/* Cette fonction lit une liste prefixee a partir d'un fichier et       */
+/* renvoie une representation prefixee, ainsi que le nombre d'elements  */
+/* et le nombre de racines.                                             */
+/*                                                                      */
+/* En entrée:   fileName le nom du fichier                              */
+/*              tabEltPref tableau des elements de la representation    */
+/*              prefixee                                                */
+/*              nbEltsPref adresse contenant le nombre d'elements de    */
+/*              tabEltPref                                              */
+/* En sortie:   tabEltPref tableau des elements de la representation    */
+/*              prefixee                                                */
+/*              nbEltsPref adresse contenant le nombre d'elements de    */
+/*              tabEltPref                                              */
+/*              nbRacines le nombre de racines                          */
+/* -------------------------------------------------------------------- */
 int lirePref_fromFileName(const char* fileName, eltPrefPostFixee_t* tabEltPref, int* nbEltsPref)
 {
     FILE *file = fopen(fileName, "r");
@@ -55,6 +74,17 @@ int lirePref_fromFileName(const char* fileName, eltPrefPostFixee_t* tabEltPref, 
  * @param [in, out] tabEltPref tableau des elements de la representation prefixee
  * @param [in, out] nbEltsPref le nombre des elements du tabEltPref
  */
+/* -------------------------------------------------------------------- */
+/* printTabEltPref Affiche une liste prefixee                           */
+/*                                                                      */
+/* Cette fonction affiche les elements d'une representation prefixee    */
+/*                                                                      */
+/* En entrée:   file le flux de sortie                                  */
+/*              tabEltPref le tableau de la representation prefixee     */
+/*              nbEltsPref le nombre d'elements de tabEltPref           */
+/* En sortie:   tabEltPref le tableau de la representation prefixee     */
+/*              nbEltsPref le nombre d'elements de tabEltPref           */
+/* -------------------------------------------------------------------- */
 void printTabEltPref(FILE *file, eltPrefPostFixee_t *tabEltPref, int nbEltsPref)
 {
     for(int i = 0; i < nbEltsPref; i++)
@@ -76,6 +106,14 @@ void printTabEltPref(FILE *file, eltPrefPostFixee_t *tabEltPref, int nbEltsPref)
  * @param [in] val la valeur du point
  * @return l'adresse du nouveau point 
  */
+/* -------------------------------------------------------------------- */
+/* allocPoint Creer et initialise un nouveau point de l'arborescence    */
+/*                                                                      */
+/* Cette fonction creee et initialise une nouvelle cellule dans la liste*/
+/*                                                                      */
+/* En entree: val la valeur a ajouter                                   */
+/* En sortie: l'adresse du nouveau point                                */
+/* -------------------------------------------------------------------- */
 cell_lvlh_t* allocPoint(char val)
 {
     cell_lvlh_t* point = (cell_lvlh_t*)malloc(sizeof(cell_lvlh_t));
@@ -91,13 +129,25 @@ cell_lvlh_t* allocPoint(char val)
 }
 
 /**
- * @brief construire un arbre avec lvlh a partir de representatioan prefixee
+ * @brief construire un arbre avec lvlh a partir de representation prefixee
  * @param [in] tabEltPref tableau des elements de la representation prefixee
  * @param [in] nbRacines nombre de racines de l'arborescence
  * @return : 
  *     - NULL si l'arbre resultatnt est vide
  *     - l'adresse de la racine de l'arbre sinon
 */
+/* -------------------------------------------------------------------- */
+/* pref2lvlh Construit un arbe a partir de la representation prefixee   */
+/*                                                                      */
+/* Cette fonction construit un arbre a partir de la representation      */
+/* prefixee                                                             */
+/*                                                                      */
+/* En entrée:   tabEltPref l'adresse du tableau des elements de la      */
+/*              representation prefixee                                 */
+/*              nbRacines le nombre de racines de la representation     */
+/*              prefixee                                                */
+/* En sortie:   racine l'adresse de la racine de l'arborescence         */
+/* -------------------------------------------------------------------- */
 cell_lvlh_t * pref2lvlh(eltPrefPostFixee_t *tabEltPref, int nbRacines)
 {
     if (nbRacines <= 0 || tabEltPref == NULL)
@@ -158,6 +208,14 @@ cell_lvlh_t * pref2lvlh(eltPrefPostFixee_t *tabEltPref, int nbRacines)
  * @brief liberer les blocs memoire d'un arbre
  * @param [in] adrPtRacine l'adresse du pointeur de la racine d'un arbre
  */
+/* -------------------------------------------------------------------- */
+/* libererArbre Libere une arborescence                                 */
+/*                                                                      */
+/* Cette fonction libere les blocs memoire d'un arbre                   */
+/*                                                                      */
+/* En entrée:   adrPtRacine l'adresse du pointeur de la racine de       */
+/*              l'arbre                                                 */
+/* -------------------------------------------------------------------- */
 void libererArbre(cell_lvlh_t **adrPtRacine)
 {
     pile_t *pile = initPile(PILE_SZ);
