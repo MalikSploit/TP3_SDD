@@ -14,6 +14,14 @@
  * @param [in] ptCell pointeur vers le 1er frere
  * @return le nombre de fils ou freres
  */
+/* -------------------------------------------------------------------- */
+/* getNbFils_ou_Freres Calcule le nombre de fils ou freres d'un point   */
+/*                                                                      */
+/* Cette fonction calcule le nombre de fils ou freres d'un point        */
+/*                                                                      */
+/* En entree:   ptCell le pointeur du premier frere                     */
+/* En sortie:   compteur le nombre de fils ou freres                    */
+/* -------------------------------------------------------------------- */
 int getNbFils_ou_Freres(cell_lvlh_t* ptCell)
 {
     int compteur = 0;
@@ -34,6 +42,15 @@ int getNbFils_ou_Freres(cell_lvlh_t* ptCell)
  * @param [in] file le flux de sortie
  * @param [in] racine la racine de l'arborescence
  */
+/* -------------------------------------------------------------------- */
+/* printPostfixee Parcours une arborescence postfixee                   */
+/*                                                                      */
+/* Cette fonction affiche une arborescence en effectuant un parcours en */
+/* profondeur                                                           */
+/*                                                                      */
+/* En entree:   file le flux de sortie                                  */
+/*              racine le pointeur de la racine de l'arborescence       */
+/* -------------------------------------------------------------------- */
 void printPostfixee(FILE *file, cell_lvlh_t * racine)
 {
     // initialisation
