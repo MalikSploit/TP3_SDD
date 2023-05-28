@@ -74,27 +74,22 @@ TEST(printTabEltPref_exTP) {
 	CHECK( 0 == strcmp(buffer, "2 (A,3) (B,2) (E,0) (J,0) (D,0) (H,1) (G,0) (C,2) (F,3) (K,0) (M,0) (T,0) (I,0)\n") );
 }
 
-// 2  (A,3)  (B,2)  (E,0)  (J,0)  (D,0)  (H,1) (G,0)  (C,2)  (F,3)  (K,0)  (M,0)  (T,0)  (I,0)
 
-TEST(pref2lvlh1_exTP) {
-    //Test avec un fichier qui existe
+//Test avec l'arbre du TP
+TEST(pref2lvlh1_pref_exTP)
+{
     int nbRacines = 0;
     int nbEltsPref = 0;
     eltPrefPostFixee_t tabEltPref[NB_ELTPREF_MAX];
     cell_lvlh_t *racine = NULL;
 
-    //Inutile
-    //char buffer[1024];
-    //FILE * file = fmemopen(buffer, 1024, "w");
-    //CHECK ( NULL != file);
-
-    printf("\033[35m\npref2lvlh1_exTP :");
+    printf("\033[35m\npref2lvlh1_pref_exTP:");
     printf("\033[0m\n");
 
     nbRacines = lirePref_fromFileName("../pref_exTP.txt", tabEltPref, &nbEltsPref);
-    REQUIRE(nbRacines == 2);
     racine = pref2lvlh(tabEltPref, nbRacines);
-    REQUIRE( NULL != racine );
+    REQUIRE(nbRacines == 2);
+    REQUIRE(racine != NULL);
 
     // Comparaison avec le contenu du fichier pref_exTP.txt
     CHECK('A' == racine->val);
@@ -126,31 +121,39 @@ TEST(pref2lvlh1_exTP) {
 
     libererArbre(&racine);
     REQUIRE(racine == NULL);
+}
 
 
-    //Test avec un fichier vide :
-    int nbRacines2 = 0;
-    int nbEltsPref2 = 0;
-    eltPrefPostFixee_t tabEltPref2[NB_ELTPREF_MAX];
-    printf("\033[35m\npref2lvlhFichier_Vide :");
+//Test avec un arbre vide
+TEST(pref2lvlh1_Fichier_Vide)
+{
+    int nbRacines = 0;
+    int nbEltsPref = 0;
+    eltPrefPostFixee_t tabEltPref[NB_ELTPREF_MAX];
+
+    printf("\033[35m\npref2lvlh1_Fichier_Vide :");
     printf("\033[0m\n");
 
-    nbRacines2 = lirePref_fromFileName("../Fichier_Vide.txt", tabEltPref2, &nbEltsPref2);
-    REQUIRE(nbRacines2 == 0);
-    racine = pref2lvlh(tabEltPref2, nbRacines2);
-    REQUIRE( NULL == racine );
+    nbRacines = lirePref_fromFileName("../Fichier_Vide.txt", tabEltPref, &nbEltsPref);
+    REQUIRE(nbRacines == 0);
+    cell_lvlh_t *racine = pref2lvlh(tabEltPref, nbRacines);
+    REQUIRE(racine == NULL);
+}
 
 
-    //Test avec un arbre representé qu'avec des liens horizentaux
-    int nbRacines3 = 0;
-    int nbEltsPref3 = 0;
-    eltPrefPostFixee_t tabEltPref3[NB_ELTPREF_MAX];
-    printf("\033[35m\npref2lvlhFichier_avec_lh :");
+//Test avec un arbre contenant uniquement des liens horizentaux
+TEST(pref2lvlh1_Fichier_avec_lh)
+{
+    int nbRacines = 0;
+    int nbEltsPref = 0;
+    eltPrefPostFixee_t tabEltPref[NB_ELTPREF_MAX];
+
+    printf("\033[35m\npref2lvlh1_Fichier_avec_lh :");
     printf("\033[0m\n");
 
-    nbRacines3 = lirePref_fromFileName("../Fichier_avec_lh.txt", tabEltPref3, &nbEltsPref3);
-    REQUIRE(nbRacines3 == 10);
-    racine = pref2lvlh(tabEltPref3, nbRacines3);
+    nbRacines = lirePref_fromFileName("../Fichier_avec_lh.txt", tabEltPref, &nbEltsPref);
+    REQUIRE(nbRacines == 10);
+    cell_lvlh_t *racine = pref2lvlh(tabEltPref, nbRacines);
     REQUIRE(racine != NULL);
 
     // Comparaison avec le contenu du fichier pref2lvlhFichier_avec_lh.txt
@@ -178,18 +181,22 @@ TEST(pref2lvlh1_exTP) {
 
     libererArbre(&racine);
     REQUIRE(racine == NULL);
+}
 
 
-    //Test avec un arbre representé qu'avec des liens verticaux
-    int nbRacines4 = 0;
-    int nbEltsPref4 = 0;
-    eltPrefPostFixee_t tabEltPref4[NB_ELTPREF_MAX];
-    printf("\033[35m\npref2lvlhFichier_avec_lv :");
+//Test avec un arbre contenant uniquement des liens verticaux
+TEST(pref2lvlh1_Fichier_avec_lv)
+{
+    int nbRacines = 0;
+    int nbEltsPref = 0;
+    eltPrefPostFixee_t tabEltPref[NB_ELTPREF_MAX];
+
+    printf("\033[35m\npref2lvlh1_Fichier_avec_lv :");
     printf("\033[0m\n");
 
-    nbRacines4 = lirePref_fromFileName("../Fichier_avec_lv.txt", tabEltPref4, &nbEltsPref4);
-    REQUIRE(nbRacines4 == 1);
-    racine = pref2lvlh(tabEltPref4, nbRacines4);
+    nbRacines = lirePref_fromFileName("../Fichier_avec_lv.txt", tabEltPref, &nbEltsPref);
+    REQUIRE(nbRacines == 1);
+    cell_lvlh_t *racine = pref2lvlh(tabEltPref, nbRacines);
     REQUIRE(racine != NULL);
 
     // Comparaison avec le contenu du fichier Fichier_avec_lv.txt
@@ -222,7 +229,8 @@ TEST(pref2lvlh1_exTP) {
 
 END_TEST_GROUP(ARBRE_CONSTRUCT)
 
-int main(void) {
+int main(void)
+{
 	RUN_TEST_GROUP(ARBRE_CONSTRUCT);
 	return EXIT_SUCCESS;
 }

@@ -28,7 +28,8 @@ TEST(nouvCell)
 }
 
 
-TEST(getNbFils_ou_Freres) {
+TEST(getNbFils_ou_Freres)
+{
 	int nbRacines = 0;
 	int nbEltsPref = 0;
 	eltPrefPostFixee_t tabEltPref[NB_ELTPREF_MAX];
@@ -67,7 +68,9 @@ TEST(getNbFils_ou_Freres) {
 }
 
 
-TEST(printPostfixee) {
+//Test avec l'arbre du TP
+TEST(printPostfixee_pref_exTP)
+{
 	int nbRacines = 0;
 	int nbEltsPref = 0;
 	eltPrefPostFixee_t tabEltPref[NB_ELTPREF_MAX];
@@ -89,6 +92,90 @@ TEST(printPostfixee) {
 	CHECK( 0 == strcmp(buffer,"(E,0) (J,0) (B,2) (D,0) (G,0) (H,1) (A,3) (K,0) (M,0) (T,0) (F,3) (I,0) (C,2) 2\n") );
 	
 	libererArbre(&racine);
+}
+
+
+//Test avec un arbre contenant uniquement des liens verticaux
+TEST(printPostfixee_Fichier_avec_lv)
+{
+    int nbRacines = 0;
+    int nbEltsPref = 0;
+    eltPrefPostFixee_t tabEltPref[NB_ELTPREF_MAX];
+    cell_lvlh_t *racine = NULL;
+
+    char buffer[1024];
+    FILE *file = fmemopen(buffer, 1024, "w");
+    REQUIRE(NULL != file);
+
+    printf("\033[35m\nprintPostfixee_Fichier_avec_lv :");
+    printf("\033[0m\n");
+
+    nbRacines = lirePref_fromFileName("../Fichier_avec_lv.txt", tabEltPref, &nbEltsPref);
+    racine = pref2lvlh(tabEltPref, nbRacines);
+
+    printPostfixee(stdout, racine);
+    printPostfixee(file, racine);
+    fclose(file);
+    CHECK(0 == strcmp(buffer, "(J,0) (I,1) (H,1) (G,1) (F,1) (E,1) (D,1) (C,1) (B,1) (A,1) 1\n"));
+
+    libererArbre(&racine);
+    CHECK(racine == NULL);
+}
+
+
+//Test avec un arbre contenant uniquement des liens horizentaux
+TEST(printPostfixee_Fichier_avec_lh)
+{
+    int nbRacines = 0;
+    int nbEltsPref = 0;
+    eltPrefPostFixee_t tabEltPref[NB_ELTPREF_MAX];
+    cell_lvlh_t *racine = NULL;
+
+    char buffer[1024];
+    FILE *file = fmemopen(buffer, 1024, "w");
+    REQUIRE(NULL != file);
+
+    printf("\033[35m\nprintPostfixee_Fichier_avec_lh :");
+    printf("\033[0m\n");
+
+    nbRacines = lirePref_fromFileName("../Fichier_avec_lh.txt", tabEltPref, &nbEltsPref);
+    racine = pref2lvlh(tabEltPref, nbRacines);
+
+    printPostfixee(stdout, racine);
+    printPostfixee(file, racine);
+    fclose(file);
+    CHECK(0 == strcmp(buffer, "(A,0) (B,0) (C,0) (D,0) (E,0) (F,0) (G,0) (H,0) (I,0) (J,0) 10\n"));
+
+    libererArbre(&racine);
+    CHECK(racine == NULL);
+}
+
+
+//Test avec un arbre vide
+TEST(printPostfixee_Fichier_Vide)
+{
+    int nbRacines = 0;
+    int nbEltsPref = 0;
+    eltPrefPostFixee_t tabEltPref[NB_ELTPREF_MAX];
+    cell_lvlh_t *racine = NULL;
+
+    char buffer[1024];
+    FILE *file = fmemopen(buffer, 1024, "w");
+    REQUIRE(NULL != file);
+
+    printf("\033[35m\nprintPostfixee_Fichier_Vide :");
+    printf("\033[0m\n");
+
+    nbRacines = lirePref_fromFileName("../Fichier_Vide.txt", tabEltPref, &nbEltsPref);
+    racine = pref2lvlh(tabEltPref, nbRacines);
+
+    printPostfixee(stdout, racine);
+    printPostfixee(file, racine);
+    fclose(file);
+    CHECK(0 == strcmp(buffer, "0\n"));
+
+    libererArbre(&racine);
+    CHECK(racine == NULL);
 }
 
 
