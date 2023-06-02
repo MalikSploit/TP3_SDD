@@ -19,6 +19,16 @@
  *   - l'adresse du point contenant v si v existe dans l'arborescence
  *   - NULL, sinon
  */
+/* -------------------------------------------------------------------- */
+/* rechercher_v Recherche un point de valeur v                          */
+/*                                                                      */
+/* Cette fonction recherche un point de valeur v                        */
+/*                                                                      */
+/* En entree:   racine pointeur de la racine de l'arborescence          */
+/*              v valeur recherchee                                     */
+/* En sortie:   resultat l'adresse du point contenant v si v existe     */
+/*              NULL sinon                                              */
+/* -------------------------------------------------------------------- */
 cell_lvlh_t* rechercher_v(cell_lvlh_t* racine, char v)
 {
     cell_lvlh_t* resultat = NULL;
@@ -79,6 +89,18 @@ cell_lvlh_t* rechercher_v(cell_lvlh_t* racine, char v)
  * @param [in] w la valeur a inserer
  * @return l'adresse du pointeur prec apres lequel w doit etre inseree
  */
+/* -------------------------------------------------------------------- */
+/* rechercherPrecFilsTries Recherche le pointeur précédent la cellule   */
+/* dans laquelle inserer une nouvelle valeur                            */
+/*                                                                      */
+/* Cette fonction recherche le pointeur précédent la cellule dans       */
+/* laquelle on insere w                                                 */
+/*                                                                      */
+/* En entree:   adrPere adresse de la cellule du pere                   */
+/*              w valeur a inserer                                      */
+/* En sortie:   pprec adresse du pointeur prec apres lequel w doit etre */
+/*              inseree                                                 */
+/* -------------------------------------------------------------------- */
 cell_lvlh_t** rechercherPrecFilsTries(cell_lvlh_t* adrPere, char w)
 {
     cell_lvlh_t** pprec = &(adrPere->lv);
@@ -100,6 +122,17 @@ cell_lvlh_t** rechercherPrecFilsTries(cell_lvlh_t* adrPere, char w)
  * @param [in] w la valeur a inserer
  * @return 1 - insertion realisee; 0 - insertion n'a pas ete realisee
  */
+/* -------------------------------------------------------------------- */
+/* rechercherPrecFilsTries Insere une valeur dans l'arborescence        */
+/*                                                                      */
+/* Cette fonction insere une valeur w dans les fils d'un point de       */
+/* valeur v                                                             */
+/*                                                                      */
+/* En entree:   racine pointeur de la racine de l'arborescence          */
+/*              v la valeur du point auquel on va inserer w en fils     */
+/*              w valeur a inserer                                      */
+/* En sortie:   resultat 1 si l'insertion a ete realisee, 0 sinon       */
+/* -------------------------------------------------------------------- */
 int insererTrie(cell_lvlh_t* racine, char v, char w)
 {
     cell_lvlh_t* pere = rechercher_v(racine, v);
