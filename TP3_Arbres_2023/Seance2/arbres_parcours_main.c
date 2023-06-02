@@ -169,7 +169,7 @@ TEST(printPostfixee_Fichier_avec_lv_iteratif)
 
 
 //Test avec un arbre contenant uniquement des liens horizentaux en iteratif
-TEST(printPostfixee_Fichier_avec_lh)
+TEST(printPostfixee_Fichier_avec_lh_iteratif)
 {
     int nbRacines = 0;
     int nbEltsPref = 0;

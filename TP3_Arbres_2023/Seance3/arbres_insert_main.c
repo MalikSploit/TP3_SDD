@@ -103,7 +103,7 @@ TEST(rechercher_v_iterative) {
 
 
 //Version recursive
-TEST(rechercher_v_iterative) {
+TEST(rechercher_v_recursive) {
     int nbRacines = 0;
     int nbEltsPref = 0;
     eltPrefPostFixee_t tabEltPref[NB_ELTPREF_MAX];
