@@ -22,7 +22,7 @@
 /* En entree:   ptCell le pointeur du premier frere                     */
 /* En sortie:   compteur le nombre de fils ou freres                    */
 /* -------------------------------------------------------------------- */
-int getNbFils_ou_Freres(cell_lvlh_t* ptCell)
+int getNbFils_ou_Freres(cell_lvlh_t *ptCell)
 {
     int compteur = 0;
     cell_lvlh_t* cour = ptCell;
@@ -34,6 +34,17 @@ int getNbFils_ou_Freres(cell_lvlh_t* ptCell)
     }
 
     return compteur;
+}
+
+//Version recursive de getNbFils_ou_Freres
+int getNbFils_ou_Freres_recursive(cell_lvlh_t *ptCell)
+{
+    if (ptCell == NULL)
+    {
+        return 0;
+    }
+
+    return 1 + getNbFils_ou_Freres(ptCell->lh);
 }
 
 
@@ -64,7 +75,6 @@ void printPostfixee(FILE *file, cell_lvlh_t * racine)
     }
     eltType_pile elp; /* élément de la pile à empiler/dépiler */
 
-    // code
     while (curr != NULL && !code) // verifie qu'il n'y a pas d'erreur, tant
         // TQ on n'est pas sur une feuille
     {
@@ -94,6 +104,26 @@ void printPostfixee(FILE *file, cell_lvlh_t * racine)
             }
         }
     }
-    fprintf(file, "%d\n", getNbFils_ou_Freres(racine)); // affiche le nombre de racine
+    fprintf(file, "%d\n", getNbFils_ou_Freres(racine)); // affiche le nombre de racines
     libererPile(&pile); // libere pile
 }
+
+//Version recursive de printPostfixee
+void printPostfixee_auxiliaire(FILE *file, cell_lvlh_t *racine)
+{
+    if (racine == NULL)
+    {
+        return;
+    }
+
+    printPostfixee_auxiliaire(file, racine->lv); // Parcours récursif des fils
+    fprintf(file, "(%c,%d) ", racine->val, getNbFils_ou_Freres(racine->lv));
+    printPostfixee_auxiliaire(file, racine->lh); // Parcours récursif des frères
+}
+
+void printPostfixee_recursive(FILE *file, cell_lvlh_t *racine)
+{
+    printPostfixee_auxiliaire(file, racine);
+    fprintf(file, "%d\n", getNbFils_ou_Freres(racine)); // affiche le nombre de racines
+}
+

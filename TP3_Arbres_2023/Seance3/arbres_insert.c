@@ -3,10 +3,7 @@
  * @brief fichier d'implementation du module pour l'insertion de valeur dans une arborescence
  */
 #include <stdio.h>
-#include <stdlib.h>
-
 #include "../pile.h"
-#include "../eltsArbre.h"
 #include "arbres_insert.h"
 #include "../Seance1/arbres_construct.h"
 
@@ -82,6 +79,43 @@ cell_lvlh_t* rechercher_v(cell_lvlh_t* racine, char v)
     return resultat;
 }
 
+//Version recursive de rechercher_v
+cell_lvlh_t* rechercher_v_recursive(cell_lvlh_t* racine, char v)
+{
+    if (racine == NULL)
+    {
+        return NULL;
+    }
+
+    // Si la valeur du point courant correspond à la valeur recherchée, on renvoie le point courant
+    if (racine->val == v)
+    {
+        return racine;
+    }
+
+    // Recherche récursive dans les fils du point courant
+    cell_lvlh_t* resultat = rechercher_v_recursive(racine->lv, v);
+
+    // Si le résultat a été trouvé dans les fils, on le renvoie
+    if (resultat != NULL)
+    {
+        return resultat;
+    }
+
+    // Recherche récursive dans les frères du point courant
+    resultat = rechercher_v_recursive(racine->lh, v);
+
+    // Si le résultat a été trouvé dans les frères, on le renvoie
+    if (resultat != NULL)
+    {
+        return resultat;
+    }
+
+    // Si la valeur recherchée n'a pas été trouvée dans l'arborescence, on renvoie NULL
+    return NULL;
+}
+
+
 
 /**
  * @brief rechercher le double prec de w dans une liste de fils
@@ -114,6 +148,23 @@ cell_lvlh_t** rechercherPrecFilsTries(cell_lvlh_t* adrPere, char w)
     return pprec;
 }
 
+//Version recursive de rechercherPrecFilsTries
+cell_lvlh_t** rechercherPrecFilsTries_auxiliaire(cell_lvlh_t** pprec, char w)
+{
+    if (*pprec == NULL || (*pprec)->val >= w)
+    {
+        return pprec;
+    }
+
+    return rechercherPrecFilsTries_auxiliaire(&((*pprec)->lh), w);
+}
+
+cell_lvlh_t** rechercherPrecFilsTries_recursive(cell_lvlh_t* adrPere, char w)
+{
+    cell_lvlh_t** pprec = &(adrPere->lv);
+    return rechercherPrecFilsTries_auxiliaire(pprec, w);
+}
+
 
 /**
  * @brief inserer une valeur w dans les fils d'un point de valeur v
@@ -141,23 +192,15 @@ int insererTrie(cell_lvlh_t* racine, char v, char w)
     if (pere != NULL)
     {
         cell_lvlh_t** pprec = rechercherPrecFilsTries(pere, w);
-        if (*(pprec) != NULL)
-        {
-            printf("(*pprec)->val = %c\n", (*pprec)->val);
-        }
 
-        // Vérifier si la valeur w n'existe pas déjà dans les fils
-        if (*pprec == NULL || (*pprec)->val != w)
-        {
-            // Allouer un nouveau point de valeur w
-            cell_lvlh_t* nouv = allocPoint(w);
+        // Allouer un nouveau point de valeur w
+        cell_lvlh_t* nouv = allocPoint(w);
 
-            if (nouv != NULL)
-            {
-                nouv->lh = *pprec;
-                *pprec = nouv;
-                resultat = 1;
-            }
+        if (nouv != NULL)
+        {
+            nouv->lh = *pprec;
+            *pprec = nouv;
+            resultat = 1;
         }
     }
 

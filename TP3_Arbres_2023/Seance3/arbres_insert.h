@@ -17,6 +17,7 @@
  *   - NULL, sinon
  */
 cell_lvlh_t* rechercher_v(cell_lvlh_t* racine, char v);
+cell_lvlh_t* rechercher_v_recursive(cell_lvlh_t* racine, char v);
 
 
 /**
@@ -26,6 +27,7 @@ cell_lvlh_t* rechercher_v(cell_lvlh_t* racine, char v);
  * @return l'adresse du pointeur prec apres lequel w doit etre inseree
  */
 cell_lvlh_t** rechercherPrecFilsTries(cell_lvlh_t* adrPere, char w);
+cell_lvlh_t** rechercherPrecFilsTries_recursive(cell_lvlh_t* adrPere, char w);
 
 
 /**

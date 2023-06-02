@@ -1,4 +1,4 @@
-CC = gcc
+CC = gcc-11
 CFLAGS = -Wall -Wextra -g
 LDFLAGS =
 
