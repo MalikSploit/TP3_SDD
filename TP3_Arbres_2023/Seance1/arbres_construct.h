@@ -42,7 +42,7 @@ cell_lvlh_t* allocPoint(char val);
  *     - l'adresse de la racine de l'arbre sinon
 */
 cell_lvlh_t *pref2lvlh(eltPrefPostFixee_t *tabEltPref, int nbRacines);
-cell_lvlh_t *pref2lvlh_recursive(eltPrefPostFixee_t *tabEltPref, int nbRacines);
+
 
 /**
  * @brief liberer les blocs memoire d'un arbre

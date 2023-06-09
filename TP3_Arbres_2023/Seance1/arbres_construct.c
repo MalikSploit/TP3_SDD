@@ -273,40 +273,6 @@ cell_lvlh_t *pref2lvlh(eltPrefPostFixee_t *tabEltPref, int nbRacines)
     return racine;
 }
 
-//Version recursive de pref2lvlh ne fonctionne pas :(
-cell_lvlh_t* pref2lvlh_auxiliaire(eltPrefPostFixee_t** tabEltPref, int* nbRacines)
-{
-    if (*nbRacines <= 0 || tabEltPref == NULL)
-    {
-        return NULL;
-    }
-
-    cell_lvlh_t* racine = allocPoint((*tabEltPref)->val);
-    (*tabEltPref)++;
-    (*nbRacines)--;
-
-    racine->lv = pref2lvlh_auxiliaire(tabEltPref, nbRacines);
-
-    if (racine->lv != NULL)
-    {
-        racine->lh = pref2lvlh_auxiliaire(tabEltPref, &((*tabEltPref)->nbFils));
-    }
-
-    return racine;
-}
-
-cell_lvlh_t* pref2lvlh_recursive(eltPrefPostFixee_t* tabEltPref, int nbRacines)
-{
-    if (nbRacines <= 0 || tabEltPref == NULL)
-    {
-        return NULL;
-    }
-
-    eltPrefPostFixee_t* ptrTabEltPref = tabEltPref;
-    return pref2lvlh_auxiliaire(&ptrTabEltPref, &nbRacines);
-}
-
-
 /**
  * @brief liberer les blocs memoire d'un arbre
  * @param [in] adrPtRacine l'adresse du pointeur de la racine d'un arbre
